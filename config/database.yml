@@ -17,7 +17,7 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: fangamer
+  database: goonswarm
   username: root
   password:
   socket: /tmp/mysql.sock
@@ -28,7 +28,7 @@ development:
 test:
   adapter: mysql
   encoding: utf8
-  database: fangamer_test
+  database: goonswarm_test
   username: root
   password:
   socket: /tmp/mysql.sock
@@ -36,7 +36,7 @@ test:
 production:
   adapter: mysql
   encoding: utf8
-  database: fangamer
+  database: goonswarm
   username: root
   password: 
   socket: /tmp/mysql.sock
@@ -44,7 +44,7 @@ production:
 zomg:
   adapter: mysql
   encoding: utf8
-  database: zomg
+  database: goonswarm
   username: root
   password:
   socket: /tmp/mysql.sock
