@@ -1,0 +1,10 @@
+%table
+  %tr
+    %th Region
+    %th Constellation
+    %th System
+  - @systems.each do |system|
+    %tr
+      %td= system.region.name
+      %td= system.constellation.name
+      %td= system.name
