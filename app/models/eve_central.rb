@@ -2,6 +2,9 @@ require 'faster_csv'
 
 class EveCentral < ActiveRecord::Base
   
+  belongs_to :station,:class_name=>"EveStations"
+  belongs_to :system,:class_name=>"EveSystems"
+  
   def self.new_dump(dumpfile)
     ActiveRecord::Base.connection.execute("TRUNCATE TABLE `eve_centrals`")
     f = FasterCSV.open(dumpfile)
