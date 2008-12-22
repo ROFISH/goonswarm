@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081222030904) do
+ActiveRecord::Schema.define(:version => 20081222034148) do
 
   create_table "eve_alliances", :force => true do |t|
     t.string   "name"
@@ -87,6 +87,34 @@ ActiveRecord::Schema.define(:version => 20081222030904) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "eve_stations", :force => true do |t|
+    t.integer "security",                 :limit => 2
+    t.float   "dockingCostPerVolume"
+    t.float   "maxShipVolumeDockable"
+    t.integer "officeRentalCost"
+    t.integer "operation_id",             :limit => 1
+    t.integer "station_type_id",          :limit => 2
+    t.integer "corporation_id"
+    t.integer "system_id"
+    t.integer "constellation_id"
+    t.integer "region_id"
+    t.string  "name",                     :limit => 100
+    t.float   "x"
+    t.float   "y"
+    t.float   "z"
+    t.float   "reprocessingEfficiency"
+    t.float   "reprocessingStationsTake"
+    t.integer "reprocessingHangarFlag",   :limit => 1
+  end
+
+  add_index "eve_stations", ["constellation_id"], :name => "eve_stations_IX_constellation"
+  add_index "eve_stations", ["corporation_id"], :name => "eve_stations_IX_corporation"
+  add_index "eve_stations", ["operation_id"], :name => "eve_stations_IX_operation"
+  add_index "eve_stations", ["region_id"], :name => "eve_stations_IX_region"
+  add_index "eve_stations", ["system_id"], :name => "eve_stations_IX_system"
+  add_index "eve_stations", ["station_type_id"], :name => "eve_stations_IX_type"
+  add_index "eve_stations", ["system_id", "constellation_id", "region_id"], :name => "system_id"
 
   create_table "eve_system_jumps", :id => false, :force => true do |t|
     t.integer "fromRegionID"
