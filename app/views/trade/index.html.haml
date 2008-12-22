@@ -1,0 +1,17 @@
+%h2 Sorted by ISK per m<sup>3</sup> in >= .500 space
+%table
+  -for type in @types
+    %tr
+      %th{:colspan=>2}=type.name
+    %tr
+      %th{:colspan=>1} Market Sell Orders
+      %th{:colspan=>1} Market Buy Orders
+    %tr{:style=>"text-align:center"}
+      %td
+        -for sell in type.min_sell_prices
+          %p== #{sell.price}<br>#{sell.station.name rescue "Unknown Station in "+sell.system.name }
+      %td
+        -for buy in type.max_buy_prices
+          %p== #{buy.price}<br>#{buy.station.name rescue "Unknown Station in "+buy.system.name }
+    %tr
+      %th{:colspan=>2} &nbsp;
