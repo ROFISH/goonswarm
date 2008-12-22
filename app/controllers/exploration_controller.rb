@@ -5,6 +5,10 @@ class ExplorationController < ApplicationController
     @systems = @alliance.systems.find(:all,:order=>"`eve_regions`.`important` DESC,`eve_systems`.`region_id`,`eve_systems`.`constellation_id` ASC",:include=>{:constellation=>:region},:readonly=>true)
   end
   
+  def canvastest
+    render :text=>"hi"
+  end
+  
   def sov_update
     if request.post?
       doc = REXML::Document.new(params['sov']['file'])

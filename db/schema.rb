@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081216234130) do
+ActiveRecord::Schema.define(:version => 20081219004739) do
 
   create_table "eve_alliances", :force => true do |t|
     t.string   "name"
@@ -67,6 +67,20 @@ ActiveRecord::Schema.define(:version => 20081216234130) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "eve_system_jumps", :id => false, :force => true do |t|
+    t.integer "fromRegionID"
+    t.integer "fromConstellationID"
+    t.integer "fromSolarSystemID",   :null => false
+    t.integer "toSolarSystemID",     :null => false
+    t.integer "toConstellationID"
+    t.integer "toRegionID"
+  end
+
+  add_index "eve_system_jumps", ["fromConstellationID"], :name => "mapSolarSystemJumps_IX_fromConstellation"
+  add_index "eve_system_jumps", ["fromRegionID"], :name => "mapSolarSystemJumps_IX_fromRegion"
+  add_index "eve_system_jumps", ["fromSolarSystemID", "fromConstellationID", "fromRegionID"], :name => "fromSolarSystemID"
+  add_index "eve_system_jumps", ["toSolarSystemID", "toConstellationID", "toRegionID"], :name => "toSolarSystemID"
 
   create_table "eve_systems", :force => true do |t|
     t.integer "region_id"
