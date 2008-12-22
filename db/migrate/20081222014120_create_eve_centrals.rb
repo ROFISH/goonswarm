@@ -16,9 +16,23 @@ class CreateEveCentrals < ActiveRecord::Migration
       t.column :reported_time, :datetime
       t.timestamps
     end
+    add_index :eve_centrals, :type_id
   end
 
   def self.down
     drop_table :eve_centrals
   end
 end
+
+
+#5200000000
+#864999999
+#SELECT type_id,
+#   (SELECT MAX(price) FROM `eve_centrals` e2 WHERE e2.type_id=e1.type_id && e2.bid = 1) AS `max_buy_price`,
+#   (SELECT MIN(price) FROM `eve_centrals` e2 WHERE e2.type_id=e1.type_id && e2.bid = 0) AS `min_sell_price`,
+#   (SELECT MAX(price) FROM `eve_centrals` e2 WHERE e2.type_id=e1.type_id && e2.bid = 1) - (SELECT MIN(price) FROM `eve_centrals` e2 WHERE e2.type_id=e1.type_id && e2.bid = 0) AS `difference`
+#
+# FROM `eve_centrals` e1
+# WHERE `bid` = 1
+#group by type_id
+#order by difference DESC
