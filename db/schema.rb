@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081219004739) do
+ActiveRecord::Schema.define(:version => 20081222030904) do
 
   create_table "eve_alliances", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,26 @@ ActiveRecord::Schema.define(:version => 20081219004739) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "eve_centrals", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "region_id"
+    t.integer  "system_id"
+    t.integer  "station_id"
+    t.integer  "type_id"
+    t.boolean  "bid"
+    t.float    "price"
+    t.integer  "minvolume"
+    t.integer  "volremain"
+    t.integer  "volenter"
+    t.integer  "duration"
+    t.integer  "range"
+    t.datetime "reported_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "eve_centrals", ["type_id"], :name => "type_id"
 
   create_table "eve_constellations", :force => true do |t|
     t.integer "region_id"
@@ -116,5 +136,49 @@ ActiveRecord::Schema.define(:version => 20081219004739) do
   add_index "eve_systems", ["security"], :name => "mapSolarSystems_IX_security"
   add_index "eve_systems", ["faction_id"], :name => "factionID"
   add_index "eve_systems", ["sunTypeID"], :name => "sunTypeID"
+
+  create_table "eve_types", :force => true do |t|
+    t.integer "group_id",            :limit => 2
+    t.string  "name",                :limit => 100
+    t.string  "description",         :limit => 3000
+    t.integer "graphic_id",          :limit => 2
+    t.float   "radius"
+    t.float   "mass"
+    t.float   "volume"
+    t.float   "capacity"
+    t.integer "portionSize"
+    t.integer "race_id",             :limit => 1
+    t.float   "basePrice"
+    t.boolean "published"
+    t.integer "market_group_id",     :limit => 2
+    t.float   "chanceOfDuplicating"
+  end
+
+  add_index "eve_types", ["group_id"], :name => "eve_types_IX_Group"
+  add_index "eve_types", ["graphic_id"], :name => "graphicID"
+  add_index "eve_types", ["race_id"], :name => "raceID"
+  add_index "eve_types", ["market_group_id"], :name => "marketGroupID"
+
+  create_table "invTypes", :force => true do |t|
+    t.integer "group_id",            :limit => 2
+    t.string  "name",                :limit => 100
+    t.string  "description",         :limit => 3000
+    t.integer "graphic_id",          :limit => 2
+    t.float   "radius"
+    t.float   "mass"
+    t.float   "volume"
+    t.float   "capacity"
+    t.integer "portionSize"
+    t.integer "race_id",             :limit => 1
+    t.float   "basePrice"
+    t.boolean "published"
+    t.integer "market_group_id",     :limit => 2
+    t.float   "chanceOfDuplicating"
+  end
+
+  add_index "invTypes", ["group_id"], :name => "invTypes_IX_Group"
+  add_index "invTypes", ["graphic_id"], :name => "graphicID"
+  add_index "invTypes", ["race_id"], :name => "raceID"
+  add_index "invTypes", ["market_group_id"], :name => "marketGroupID"
 
 end
